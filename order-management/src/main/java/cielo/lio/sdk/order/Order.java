@@ -5,76 +5,38 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class Order {
-	/**
-	 * Valid Order statuses
-	 * <li>{@link #DRAFT}</li>
-	 * <li>{@link #ENTERED}</li>
-	 * <li>{@link #PAID}</li>
-	 * <li>{@link #CLOSED}</li>
-	 */
-	public enum Status {
-		DRAFT, ENTERED, PAID, CLOSED
-	}
-
-	/**
-	 * {@link Order#setCreatedAt(String)}
-	 */
+	
+	@JsonProperty("created_at")
 	@SerializedName("created_at")
 	private String createdAt;
-
-	/**
-	 * {@link Order#setId(String)}
-	 */
+	
 	private String id;
-
-	/**
-	 * {@link Order#setItems(List<OrderItem>})}
-	 */
+	
 	private List<OrderItem> items;
-
-	/**
-	 * {@link Order#setNotes(String)}
-	 */
+	
 	private String notes;
-
-	/**
-	 * {@link Order#setNumber(String)}
-	 */
+	
 	private String number;
-
-	/**
-	 * {@link Order#setPrice(int)}
-	 */
+	
 	private int price;
-
-	/**
-	 * {@link Order#setReference(String)}
-	 */
+	
 	private String reference;
-
-	/**
-	 * {@link Order#setRemaining(int)}
-	 */
+	
 	private int remaining;
-
-	/**
-	 * {@link Order#setStatus(Status)}
-	 */
+	
 	private Status status;
-
-	/**
-	 * {@link Order#setTransactions(List<Transactions>)}
-	 */
+	
 	private List<Transaction> transactions;
-
-	/**
-	 * {@link Order#setUpdatedAt(String)}
-	 */
+	
+	@JsonProperty("updated_at")
 	@SerializedName("updated_at")
 	private String updatedAt;
+
+	public Order() {}
 
 	/**
 	 * Create a new Order setting the order number

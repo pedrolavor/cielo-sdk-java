@@ -1,5 +1,6 @@
 package cielo.lio.sdk.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class Transaction {
@@ -30,6 +31,7 @@ public class Transaction {
 	/**
 	 * {@link Transaction#setAuthorizationCode(String)}
 	 */
+	@JsonProperty("authorization_code")
 	@SerializedName("authorization_code")
 	private String authorizationCode;
 
@@ -41,6 +43,7 @@ public class Transaction {
 	/**
 	 * {@link Transaction#setCreatedAt(String)}
 	 */
+	@JsonProperty("created_at")
 	@SerializedName("created_at")
 	private String createdAt;
 
@@ -62,6 +65,7 @@ public class Transaction {
 	/**
 	 * {@link Transaction#setPaymentProduct(PaymentProduct)}
 	 */
+	@JsonProperty("payment_product")
 	@SerializedName("payment_product")
 	private PaymentProduct paymentProduct;
 
@@ -73,18 +77,21 @@ public class Transaction {
 	/**
 	 * {@link Transaction#setTerminalNumber(int)}
 	 */
+	@JsonProperty("terminal_number")
 	@SerializedName("terminal_number")
 	private int terminalNumber;
 
 	/**
 	 * {@link Transaction#setTransactionType(TransactionType)}
 	 */
+	@JsonProperty("transaction_type")
 	@SerializedName("transaction_type")
 	private TransactionType transactionType;
 
 	/**
 	 * {@link Transaction#setUpdatedAt(String)}
 	 */
+	@JsonProperty("updated_at")
 	@SerializedName("updated_at")
 	private String updatedAt;
 

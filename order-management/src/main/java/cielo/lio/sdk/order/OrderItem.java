@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class OrderItem {
@@ -26,6 +27,7 @@ public class OrderItem {
 	/**
 	 * {@link OrderItem#setCreatedAt(String)}
 	 */
+	@JsonProperty("created_at")
 	@SerializedName("created_at")
 	private String createdAt;
 
@@ -62,20 +64,25 @@ public class OrderItem {
 	/**
 	 * {@link OrderItem#setUnitOfMeasure(UnitOfMeasure)}
 	 */
+	@JsonProperty("unit_of_measure")
 	@SerializedName("unit_of_measure")
 	private UnitOfMeasure unitOfMeasure;
 
 	/**
 	 * {@link OrderItem#setUnitPrice(int)}
 	 */
+	@JsonProperty("unit_price")
 	@SerializedName("unit_price")
 	private int unitPrice;
 
 	/**
 	 * {@link OrderItem#setUpdatedAt(String)}
 	 */
+	@JsonProperty("updated_at")
 	@SerializedName("updated_at")
 	private String updatedAt;
+
+	public OrderItem() {}
 
 	/**
 	 * Create an order item defining its unit price

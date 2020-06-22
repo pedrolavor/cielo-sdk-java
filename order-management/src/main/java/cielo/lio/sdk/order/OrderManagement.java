@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.Header;
@@ -27,14 +28,16 @@ import cielo.lio.sdk.order.request.CieloRequestException;
 
 public class OrderManagement {
 	private Environment environment;
+	private String clientId;
 	private String accessToken;
 	private String merchantId;
 
-	public OrderManagement(String merchantId, String accessToken) {
-		this(merchantId, accessToken, cielo.lio.sdk.order.Environment.PRODUCTION);
+	public OrderManagement(String clientId, String merchantId, String accessToken) {
+		this(clientId, merchantId, accessToken, cielo.lio.sdk.order.Environment.PRODUCTION);
 	}
 
-	public OrderManagement(String merchantId, String accessToken, Environment environment) {
+	public OrderManagement(String clientId, String merchantId, String accessToken, Environment environment) {
+		this.clientId = clientId;
 		this.merchantId = merchantId;
 		this.accessToken = accessToken;
 		this.environment = environment;
@@ -42,8 +45,6 @@ public class OrderManagement {
 
 	public Order createOrder(Order order) throws CieloRequestException, IOException {
 		String url = environment.getUrl() + "/orders";
-
-		System.out.println(url);
 
 		HttpPost request = new HttpPost(url);
 		String entity = new GsonBuilder().setPrettyPrinting().create().toJson(order);
@@ -66,6 +67,28 @@ public class OrderManagement {
 
 	public void closeOrder(String id) throws IOException, CieloRequestException {
 		updateOrder(id, "close");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Order> getOrders() throws IOException, CieloRequestException {
+		String url = environment.getUrl() + "/orders";
+
+		HttpGet request = new HttpGet(url);
+
+		String response = sendRequest(request);
+		Gson gson = new Gson();
+
+		return gson.fromJson(response, List.class);
+	}
+
+	public String getOrdersString() throws IOException, CieloRequestException {
+		String url = environment.getUrl() + "/orders";
+
+		HttpGet request = new HttpGet(url);
+
+		String response = sendRequest(request);
+
+		return response;
 	}
 
 	public Order getOrder(String id) throws IOException, CieloRequestException {
@@ -195,8 +218,9 @@ public class OrderManagement {
 		request.addHeader("Content-Type", "application/json");
 		request.addHeader("User-Agent", "Cielo-Lio SDK");
 
+		request.addHeader("client-id", clientId);
+		request.addHeader("merchant-id", merchantId);
 		request.addHeader("access-token", accessToken);
-		request.addHeader("Merchant-Id", merchantId);
 
 		HttpResponse response = client.execute(request);
 
