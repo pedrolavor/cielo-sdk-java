@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder;
 
 import cielo.lio.sdk.Environment;
 import cielo.lio.sdk.order.request.CieloError;
+import cielo.lio.sdk.order.request.CieloLioFilter;
 import cielo.lio.sdk.order.request.CieloRequestException;
 
 public class OrderManagement {
@@ -58,23 +59,46 @@ public class OrderManagement {
 	}
 
 	public void cancelOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "cancel");
+		updateOrder(id, "CANCEL");
+	}
+
+	public void payOrder(String id) throws IOException, CieloRequestException {
+		updateOrder(id, "PAY");
 	}
 
 	public void placeOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "place");
+		updateOrder(id, "PLACE");
 	}
 
 	public void closeOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "close");
+		updateOrder(id, "CLOSE");
+	}
+
+	public List<Order> getOrders() throws IOException, CieloRequestException {
+		return getOrders(null);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getOrders() throws IOException, CieloRequestException {
-		String url = environment.getUrl() + "/orders";
+	public List<Order> getOrders(CieloLioFilter filtro) throws IOException, CieloRequestException {
+
+		String query = "";
+		if(filtro != null) {
+			if(filtro.getPageSize() != null) query += ("&page_size=" + filtro.getPageSize());
+			if(filtro.getPage() != null) query += ("&page=" + filtro.getPage());
+			if(filtro.getStatus() != null) query += ("&status=" + filtro.getStatus());
+			if(filtro.getNumber() != null) query += ("&number=" + filtro.getNumber());
+			if(filtro.getMerchantId() != null) query += ("&merchant_id=" + filtro.getMerchantId());
+			if(filtro.getReference() != null) query += ("&reference=" + filtro.getReference());
+			if(filtro.getTerminalNumber() != null) query += ("&terminal_number=" + filtro.getTerminalNumber());
+			if(filtro.getLastQueryDate() != null) query += ("&last_query_date=" + filtro.getLastQueryDate());
+			query = query.replaceFirst("&", "?");
+		}
+
+		String url = environment.getUrl() + "/orders" + query;
+
+		System.out.println(url);
 
 		HttpGet request = new HttpGet(url);
-
 		String response = sendRequest(request);
 		Gson gson = new Gson();
 
@@ -227,8 +251,8 @@ public class OrderManagement {
 		return readResponse(response);
 	}
 
-	void updateOrder(String id, String action) throws IOException, CieloRequestException {
-		String url = environment.getUrl() + "/orders/" + id + "?action=" + action;
+	void updateOrder(String id, String operation) throws IOException, CieloRequestException {
+		String url = environment.getUrl() + "/orders/" + id + "?operation=" + operation;
 
 		HttpPut request = new HttpPut(url);
 
