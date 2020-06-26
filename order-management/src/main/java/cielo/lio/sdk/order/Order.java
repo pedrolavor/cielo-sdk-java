@@ -36,6 +36,19 @@ public class Order {
 	@SerializedName("updated_at")
 	private String updatedAt;
 
+	public enum Status {
+
+		/**
+		 * Valid Order statuses
+		 * <li>{@link #DRAFT}</li>
+		 * <li>{@link #ENTERED}</li>
+		 * <li>{@link #PAID}</li>
+		 * <li>{@link #CLOSED}</li>
+		 */
+		
+		DRAFT, ENTERED, PAID, CLOSED
+	}
+
 	public Order() {}
 
 	/**

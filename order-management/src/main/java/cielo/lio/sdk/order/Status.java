@@ -1,6 +1,6 @@
 package cielo.lio.sdk.order;
 
-public  enum Status {
+public enum Status {
 
     /**
      * Valid Order statuses

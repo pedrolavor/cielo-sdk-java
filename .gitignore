@@ -4,6 +4,8 @@ local.properties
 .settings/
 .project
 .classpath
+.vscode
+.factorypath
 
 # Maven
 
