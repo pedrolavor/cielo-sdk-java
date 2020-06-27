@@ -6,7 +6,7 @@ package cielo.lio.sdk.order;
  * <li>{@link #PRODUCTION}</li>
  * <li>{@link #SANDBOX}</li>
  */
-public enum Environment implements cielo.lio.sdk.Environment {
+public enum Environment {
 	/**
 	 * Environment.PRODUCTION
 	 */

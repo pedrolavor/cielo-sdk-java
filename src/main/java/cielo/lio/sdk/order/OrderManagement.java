@@ -22,7 +22,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import cielo.lio.sdk.Environment;
 import cielo.lio.sdk.order.request.CieloError;
 import cielo.lio.sdk.order.request.CieloLioFilter;
 import cielo.lio.sdk.order.request.CieloRequestException;
