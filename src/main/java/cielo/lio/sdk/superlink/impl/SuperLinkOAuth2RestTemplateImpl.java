@@ -30,14 +30,13 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
     }
 
     public SuperLinkOAuth2RestTemplateImpl(String clientId, String clientSecret, Environment environment) {
-        this.url = environment.getResourceUrl();
-
         ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
         resourceDetails.setAccessTokenUri(environment.getAccessTokenUrl() + "/token");
         resourceDetails.setClientId(clientId);
         resourceDetails.setClientSecret(clientSecret);
 
         this.restTemplate = new OAuth2RestTemplate(resourceDetails);
+        this.url = environment.getResourceUrl();
     }
 
     public Product createLink(Product product) {
@@ -48,9 +47,11 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
     @SuppressWarnings("unchecked")
     public List<Product> getLinks() {
+        List<Product> aux = new ArrayList<Product>();
+        
         restTemplate.getAccessToken();
         ResponseEntity<List<Product>> response =
-            restTemplate.getForEntity(url + "/products/", (Class<List<Product>>) new ArrayList<Product>().getClass());
+            restTemplate.getForEntity(url + "/products/", (Class<List<Product>>) aux.getClass());
         return response.getBody();
     }
 
