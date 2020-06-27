@@ -6,14 +6,14 @@ import cielo.lio.sdk.superlink.model.Product;
 
 public interface SuperLink {
 
-    public Product createLink(Product product);
+    Product createLink(Product product);
 
-    public List<Product> getLinks();
+    List<Product> getLinks();
 
-    public Product getLink(String id);
+    Product getLink(String id);
 
-    public void updateLink(String id, Product product);
+    void updateLink(String id, Product product);
 
-    public void deleteLink(String id);
+    void deleteLink(String id);
     
 }

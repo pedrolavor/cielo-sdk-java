@@ -18,7 +18,7 @@ public class Recurrent {
     private Type type;
     private Date expirationDate;
 
-    public static enum Type {
+    public enum Type {
         MONTHLY,
         BIMONTHLY,
         QUARTERLY,

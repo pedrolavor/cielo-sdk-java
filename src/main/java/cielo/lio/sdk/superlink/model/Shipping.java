@@ -20,7 +20,7 @@ public class Shipping {
     private String originZipType;
     private Type type;
 
-    public static enum Type {
+    public enum Type {
         CORREIOS,
         FIXED_AMOUNT,
         FREE,

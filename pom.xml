@@ -71,7 +71,7 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.12.0</version>
+            <version>3.13.0</version>
             <executions>
                 <execution>
                     <phase>test</phase>
@@ -85,7 +85,7 @@
         <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.7.6.201602180812</version>
+            <version>0.8.5</version>
             <executions>
                 <execution>
                     <id>prepare-jacoco</id>

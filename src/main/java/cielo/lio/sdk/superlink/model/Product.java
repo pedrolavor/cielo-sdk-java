@@ -37,7 +37,7 @@ public class Product {
     private Recurrent recurrent;
     private List<Link> links;
 
-    public static enum Type {
+    public enum Type {
         ASSET,
         DIGITAL,
         SERVICE,
