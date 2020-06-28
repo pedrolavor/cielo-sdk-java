@@ -5,8 +5,8 @@ SDK para integração com o Cielo Super Link.
 ## Instaciando um SuperLink
 
 ```java
-SuperLink superLink =
-	new SuperLinkOAuth2RestTemplateImpl("client_id", "client_secret", Environment.SANDBOX);
+	SuperLink superLink =
+		new SuperLinkOAuth2RestTemplateImpl("client_id", "client_secret", Environment.SANDBOX);
 ```
 
 ## Criação de um Link

@@ -7,6 +7,17 @@ import com.google.gson.annotations.SerializedName;
 
 import cielo.sdk.ordermanager.Order.Status;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CieloLioFilter {
 
     @JsonProperty("page_size")
@@ -32,69 +43,5 @@ public class CieloLioFilter {
     @JsonProperty("last_query_date")
     @SerializedName("last_query_date")
     private Date lastQueryDate;
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-    
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public String getMerchantId() {
-        return merchantId;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setTerminalNumber(String terminalNumber) {
-        this.terminalNumber = terminalNumber;
-    }
-
-    public String getTerminalNumber() {
-        return terminalNumber;
-    }
-
-    public void setLastQueryDate(Date lastQueryDate) {
-        this.lastQueryDate = lastQueryDate;
-    }
-
-    public Date getLastQueryDate() {
-        return lastQueryDate;
-    }
     
 }
