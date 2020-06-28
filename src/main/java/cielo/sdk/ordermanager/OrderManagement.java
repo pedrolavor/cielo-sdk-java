@@ -95,8 +95,6 @@ public class OrderManagement {
 
 		String url = environment.getUrl() + "/orders" + query;
 
-		System.out.println(url);
-
 		HttpGet request = new HttpGet(url);
 		String response = sendRequest(request);
 		Gson gson = new Gson();
@@ -218,17 +216,12 @@ public class OrderManagement {
 			if (statusCode == 404) {
 				exception = new CieloRequestException("Not found", new CieloError(404, "Not found", ""), exception);
 			} else {
-				System.out.println(statusCode);
-				System.out.println(responseBody);
 				CieloError error = new Gson().fromJson(responseBody, CieloError.class);
-
 				exception = new CieloRequestException(error.getDetail(), error, exception);
 			}
 
 			throw exception;
 		}
-
-		System.out.println(responseBody);
 
 		return responseBody;
 	}

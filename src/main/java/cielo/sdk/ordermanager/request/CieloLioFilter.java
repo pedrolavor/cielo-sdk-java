@@ -5,7 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-import cielo.sdk.ordermanager.Status;
+import cielo.sdk.ordermanager.Order.Status;
 
 public class CieloLioFilter {
 

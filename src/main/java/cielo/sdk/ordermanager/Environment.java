@@ -1,29 +1,16 @@
 package cielo.sdk.ordermanager;
 
-/**
- * API Environment URLs
- * <p/>
- * <li>{@link #PRODUCTION}</li>
- * <li>{@link #SANDBOX}</li>
- */
-public enum Environment {
-	/**
-	 * Environment.PRODUCTION
-	 */
-	PRODUCTION("https://api.cielo.com.br/order-management/v1"),
+import lombok.Getter;
 
-	/**
-	 * Environment.SANDBOX
-	 */
+@Getter
+public enum Environment {
+	
+	PRODUCTION("https://api.cielo.com.br/order-management/v1"),
 	SANDBOX("https://api.cielo.com.br/sandbox-lio/order-management/v1");
 
 	private final String url;
 
 	Environment(String url) {
 		this.url = url;
-	}
-
-	public String getUrl() {
-		return this.url;
 	}
 }
