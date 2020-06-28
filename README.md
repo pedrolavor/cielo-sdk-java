@@ -5,9 +5,8 @@ SDK para integração com o order management da plataforma da Cielo/M4U na cloud
 ## Configuração do Order Management
 
 ```java
-OrderManagement orderManagement = new OrderManagement("id do merchant",
-                                                      "access token",
-                                                      Environment.PRODUCTION);
+OrderManagement orderManagement =
+	new OrderManagement("client id", "merchant id", "access token", Environment.PRODUCTION);
 ```
 
 ## Criação de um Order

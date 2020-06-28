@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.Header;
@@ -21,20 +22,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import cielo.lio.sdk.Environment;
 import cielo.lio.sdk.order.request.CieloError;
+import cielo.lio.sdk.order.request.CieloLioFilter;
 import cielo.lio.sdk.order.request.CieloRequestException;
 
 public class OrderManagement {
 	private Environment environment;
+	private String clientId;
 	private String accessToken;
 	private String merchantId;
 
-	public OrderManagement(String merchantId, String accessToken) {
-		this(merchantId, accessToken, cielo.lio.sdk.order.Environment.PRODUCTION);
+	public OrderManagement(String clientId, String merchantId, String accessToken) {
+		this(clientId, merchantId, accessToken, cielo.lio.sdk.order.Environment.PRODUCTION);
 	}
 
-	public OrderManagement(String merchantId, String accessToken, Environment environment) {
+	public OrderManagement(String clientId, String merchantId, String accessToken, Environment environment) {
+		this.clientId = clientId;
 		this.merchantId = merchantId;
 		this.accessToken = accessToken;
 		this.environment = environment;
@@ -42,8 +45,6 @@ public class OrderManagement {
 
 	public Order createOrder(Order order) throws CieloRequestException, IOException {
 		String url = environment.getUrl() + "/orders";
-
-		System.out.println(url);
 
 		HttpPost request = new HttpPost(url);
 		String entity = new GsonBuilder().setPrettyPrinting().create().toJson(order);
@@ -57,15 +58,60 @@ public class OrderManagement {
 	}
 
 	public void cancelOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "cancel");
+		updateOrder(id, "CANCEL");
+	}
+
+	public void payOrder(String id) throws IOException, CieloRequestException {
+		updateOrder(id, "PAY");
 	}
 
 	public void placeOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "place");
+		updateOrder(id, "PLACE");
 	}
 
 	public void closeOrder(String id) throws IOException, CieloRequestException {
-		updateOrder(id, "close");
+		updateOrder(id, "CLOSE");
+	}
+
+	public List<Order> getOrders() throws IOException, CieloRequestException {
+		return getOrders(null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Order> getOrders(CieloLioFilter filtro) throws IOException, CieloRequestException {
+
+		String query = "";
+		if(filtro != null) {
+			if(filtro.getPageSize() != null) query += ("&page_size=" + filtro.getPageSize());
+			if(filtro.getPage() != null) query += ("&page=" + filtro.getPage());
+			if(filtro.getStatus() != null) query += ("&status=" + filtro.getStatus());
+			if(filtro.getNumber() != null) query += ("&number=" + filtro.getNumber());
+			if(filtro.getMerchantId() != null) query += ("&merchant_id=" + filtro.getMerchantId());
+			if(filtro.getReference() != null) query += ("&reference=" + filtro.getReference());
+			if(filtro.getTerminalNumber() != null) query += ("&terminal_number=" + filtro.getTerminalNumber());
+			if(filtro.getLastQueryDate() != null) query += ("&last_query_date=" + filtro.getLastQueryDate());
+			query = query.replaceFirst("&", "?");
+		}
+
+		String url = environment.getUrl() + "/orders" + query;
+
+		System.out.println(url);
+
+		HttpGet request = new HttpGet(url);
+		String response = sendRequest(request);
+		Gson gson = new Gson();
+
+		return gson.fromJson(response, List.class);
+	}
+
+	public String getOrdersString() throws IOException, CieloRequestException {
+		String url = environment.getUrl() + "/orders";
+
+		HttpGet request = new HttpGet(url);
+
+		String response = sendRequest(request);
+
+		return response;
 	}
 
 	public Order getOrder(String id) throws IOException, CieloRequestException {
@@ -195,16 +241,17 @@ public class OrderManagement {
 		request.addHeader("Content-Type", "application/json");
 		request.addHeader("User-Agent", "Cielo-Lio SDK");
 
+		request.addHeader("client-id", clientId);
+		request.addHeader("merchant-id", merchantId);
 		request.addHeader("access-token", accessToken);
-		request.addHeader("Merchant-Id", merchantId);
 
 		HttpResponse response = client.execute(request);
 
 		return readResponse(response);
 	}
 
-	void updateOrder(String id, String action) throws IOException, CieloRequestException {
-		String url = environment.getUrl() + "/orders/" + id + "?action=" + action;
+	void updateOrder(String id, String operation) throws IOException, CieloRequestException {
+		String url = environment.getUrl() + "/orders/" + id + "?operation=" + operation;
 
 		HttpPut request = new HttpPut(url);
 
