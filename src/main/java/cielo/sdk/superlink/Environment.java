@@ -1,4 +1,4 @@
-package cielo.lio.sdk.superlink;
+package cielo.sdk.superlink;
 
 import lombok.Getter;
 

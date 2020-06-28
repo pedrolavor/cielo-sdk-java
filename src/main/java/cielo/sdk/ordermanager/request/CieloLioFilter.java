@@ -1,11 +1,11 @@
-package cielo.lio.sdk.order.request;
+package cielo.sdk.ordermanager.request;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-import cielo.lio.sdk.order.Status;
+import cielo.sdk.ordermanager.Status;
 
 public class CieloLioFilter {
 

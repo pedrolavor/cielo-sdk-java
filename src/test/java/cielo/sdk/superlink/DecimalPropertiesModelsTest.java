@@ -1,4 +1,4 @@
-package cielo.lio.sdk.superlink;
+package cielo.sdk.superlink;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import cielo.lio.sdk.superlink.model.Product;
-import cielo.lio.sdk.superlink.model.Shipping;
+import cielo.sdk.superlink.model.Product;
+import cielo.sdk.superlink.model.Shipping;
 
 public class DecimalPropertiesModelsTest {
 

@@ -1,4 +1,4 @@
-package cielo.lio.sdk.order;
+package cielo.sdk.ordermanager;
 
 public class Card {
 	/**
