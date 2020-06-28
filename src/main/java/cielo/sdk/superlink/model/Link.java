@@ -1,4 +1,4 @@
-package cielo.lio.sdk.superlink.model;
+package cielo.sdk.superlink.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

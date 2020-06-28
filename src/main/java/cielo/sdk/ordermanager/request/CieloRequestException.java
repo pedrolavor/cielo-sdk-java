@@ -1,4 +1,4 @@
-package cielo.lio.sdk.order.request;
+package cielo.sdk.ordermanager.request;
 
 /**
  * An exception that can be catch by the app

@@ -1,11 +1,11 @@
-package cielo.lio.sdk.superlink;
+package cielo.sdk.superlink;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
-import cielo.lio.sdk.superlink.impl.SuperLinkOAuth2RestTemplateImpl;
+import cielo.sdk.superlink.impl.SuperLinkOAuth2RestTemplateImpl;
 
 public class SuperLinkOAuth2RestTemplateImplTest {
 

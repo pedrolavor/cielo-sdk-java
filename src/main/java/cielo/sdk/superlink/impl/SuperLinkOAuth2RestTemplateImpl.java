@@ -1,4 +1,4 @@
-package cielo.lio.sdk.superlink.impl;
+package cielo.sdk.superlink.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
-import cielo.lio.sdk.superlink.Environment;
-import cielo.lio.sdk.superlink.SuperLink;
-import cielo.lio.sdk.superlink.model.Product;
+import cielo.sdk.superlink.Environment;
+import cielo.sdk.superlink.SuperLink;
+import cielo.sdk.superlink.model.Product;
 
 public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 

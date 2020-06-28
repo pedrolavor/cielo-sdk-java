@@ -1,8 +1,8 @@
-package cielo.lio.sdk.superlink;
+package cielo.sdk.superlink;
 
 import java.util.List;
 
-import cielo.lio.sdk.superlink.model.Product;
+import cielo.sdk.superlink.model.Product;
 
 public interface SuperLink {
 

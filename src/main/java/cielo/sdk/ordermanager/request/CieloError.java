@@ -1,4 +1,4 @@
-package cielo.lio.sdk.order.request;
+package cielo.sdk.ordermanager.request;
 
 public class CieloError {
 	private final Integer code;

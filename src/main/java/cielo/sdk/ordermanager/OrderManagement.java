@@ -1,4 +1,4 @@
-package cielo.lio.sdk.order;
+package cielo.sdk.ordermanager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,9 +22,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import cielo.lio.sdk.order.request.CieloError;
-import cielo.lio.sdk.order.request.CieloLioFilter;
-import cielo.lio.sdk.order.request.CieloRequestException;
+import cielo.sdk.ordermanager.request.CieloError;
+import cielo.sdk.ordermanager.request.CieloLioFilter;
+import cielo.sdk.ordermanager.request.CieloRequestException;
 
 public class OrderManagement {
 	private Environment environment;
@@ -33,7 +33,7 @@ public class OrderManagement {
 	private String merchantId;
 
 	public OrderManagement(String clientId, String merchantId, String accessToken) {
-		this(clientId, merchantId, accessToken, cielo.lio.sdk.order.Environment.PRODUCTION);
+		this(clientId, merchantId, accessToken, cielo.sdk.ordermanager.Environment.PRODUCTION);
 	}
 
 	public OrderManagement(String clientId, String merchantId, String accessToken, Environment environment) {
@@ -94,8 +94,6 @@ public class OrderManagement {
 		}
 
 		String url = environment.getUrl() + "/orders" + query;
-
-		System.out.println(url);
 
 		HttpGet request = new HttpGet(url);
 		String response = sendRequest(request);
@@ -218,17 +216,12 @@ public class OrderManagement {
 			if (statusCode == 404) {
 				exception = new CieloRequestException("Not found", new CieloError(404, "Not found", ""), exception);
 			} else {
-				System.out.println(statusCode);
-				System.out.println(responseBody);
 				CieloError error = new Gson().fromJson(responseBody, CieloError.class);
-
 				exception = new CieloRequestException(error.getDetail(), error, exception);
 			}
 
 			throw exception;
 		}
-
-		System.out.println(responseBody);
 
 		return responseBody;
 	}
