@@ -5,8 +5,15 @@ SDK para integração com o Cielo Super Link.
 ## Instaciando um SuperLink
 
 ```java
-	SuperLink superLink =
-		new SuperLinkOAuth2RestTemplateImpl("client_id", "client_secret", Environment.SANDBOX);
+	Environment environment = Environment.SANDBOX;
+
+	ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
+	resource.setClientId("your_client_id");
+	resource.setClientSecret("your_client_secret");
+	resource.setAccessTokenUri(environment.getAccessTokenUrl() + "/token");
+
+	OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource);
+	SuperLink superLink = new SuperLinkOAuth2RestTemplateImpl(restTemplate, environment);
 ```
 
 ## Criação de um Link
@@ -28,7 +35,7 @@ SDK para integração com o Cielo Super Link.
 
 	product = superLink.createLink(product);
 
-	Srting link = product.gettShortLink();
+	Srting link = product.getShortLink();
 ```
 
 ## Consultar um Link
