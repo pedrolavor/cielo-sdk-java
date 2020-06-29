@@ -2,7 +2,7 @@
 
 SDK para integração com o Cielo Super Link.
 
-## Instaciando um SuperLink
+## Instanciando um SuperLink
 
 ```java
 	Environment environment = Environment.SANDBOX;
