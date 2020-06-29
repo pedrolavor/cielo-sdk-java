@@ -2,11 +2,11 @@
 
 SDK para integração com o Cielo Order Manager (Cielo LIO).
 
-## Configuração do Order Management
+## Configuração do Order Manager
 
 ```java
-	OrderManagement orderManagement =
-		new OrderManagement("client_id", "merchant_id", "access_token", Environment.SANDBOX);
+	OrderManager orderManager =
+		new OrderManager("client_id", "merchant_id", "access_token", Environment.SANDBOX);
 ```
 
 ## Criação de um Order
@@ -30,7 +30,7 @@ SDK para integração com o Cielo Order Manager (Cielo LIO).
         .build();
 
 try {
-    order = orderManagement.createOrder(order);
+    order = orderManager.createOrder(order);
 } catch (IOException e) {
     // ...
 } catch (CieloRequestException e) {
@@ -42,7 +42,7 @@ try {
 
 ```java
 try {
-	orderManagement.getOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
+	orderManager.getOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
 } catch (IOException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -62,7 +62,7 @@ try {
 		.page(3)
 		.build();
 	
-	List<Order> orders = orderManagement.getOrders(filtro);
+	List<Order> orders = orderManager.getOrders(filtro);
 } catch (IOException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -76,7 +76,7 @@ try {
 
 ```java
 try {
-	orderManagement.placeOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
+	orderManager.placeOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
 } catch (IOException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -90,7 +90,7 @@ try {
 
 ```java
 try {
-	orderManagement.closeOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
+	orderManager.closeOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
 } catch (IOException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -104,7 +104,7 @@ try {
 
 ```java
 try {
-	orderManagement.deleteOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
+	orderManager.deleteOrder("de305d54-75b4-431b-adb2-eb6b9e546014");
 } catch (IOException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
