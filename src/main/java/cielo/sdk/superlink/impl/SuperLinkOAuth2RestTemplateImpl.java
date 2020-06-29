@@ -16,26 +16,16 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
     private OAuth2RestTemplate restTemplate;
     private String url;
 
-    public SuperLinkOAuth2RestTemplateImpl(ClientCredentialsResourceDetails resourceDetails) {
-        this(resourceDetails, Environment.PRODUCTION);
+    public SuperLinkOAuth2RestTemplateImpl(OAuth2RestTemplate restTemplate) {
+        this(restTemplate, cielo.sdk.superlink.model.Environment.PRODUCTION);
     }
 
-    public SuperLinkOAuth2RestTemplateImpl(ClientCredentialsResourceDetails resourceDetails, Environment environment) {
-        this.url = environment.getResourceUrl();
-        this.restTemplate = new OAuth2RestTemplate(resourceDetails);
-    }
+    public SuperLinkOAuth2RestTemplateImpl(OAuth2RestTemplate restTemplate, Environment environment) {
+        if(!(restTemplate.getResource() instanceof ClientCredentialsResourceDetails)) {
+            throw new IllegalArgumentException("The Resource Details must be ClientCredentialsResourceDetails");
+        }
 
-    public SuperLinkOAuth2RestTemplateImpl(String clientId, String clientSecret) {
-        this(clientId, clientSecret, Environment.PRODUCTION);
-    }
-
-    public SuperLinkOAuth2RestTemplateImpl(String clientId, String clientSecret, Environment environment) {
-        ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
-        resourceDetails.setAccessTokenUri(environment.getAccessTokenUrl() + "/token");
-        resourceDetails.setClientId(clientId);
-        resourceDetails.setClientSecret(clientSecret);
-
-        this.restTemplate = new OAuth2RestTemplate(resourceDetails);
+        this.restTemplate = restTemplate;
         this.url = environment.getResourceUrl();
     }
 

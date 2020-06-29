@@ -26,17 +26,17 @@ import cielo.sdk.ordermanager.request.CieloError;
 import cielo.sdk.ordermanager.request.CieloLioFilter;
 import cielo.sdk.ordermanager.request.CieloRequestException;
 
-public class OrderManagement {
+public class OrderManager {
 	private Environment environment;
 	private String clientId;
 	private String accessToken;
 	private String merchantId;
 
-	public OrderManagement(String clientId, String merchantId, String accessToken) {
+	public OrderManager(String clientId, String merchantId, String accessToken) {
 		this(clientId, merchantId, accessToken, cielo.sdk.ordermanager.Environment.PRODUCTION);
 	}
 
-	public OrderManagement(String clientId, String merchantId, String accessToken, Environment environment) {
+	public OrderManager(String clientId, String merchantId, String accessToken, Environment environment) {
 		this.clientId = clientId;
 		this.merchantId = merchantId;
 		this.accessToken = accessToken;
@@ -82,14 +82,14 @@ public class OrderManagement {
 
 		String query = "";
 		if(filtro != null) {
-			if(filtro.getPageSize() != null) query += ("&page_size=" + filtro.getPageSize());
-			if(filtro.getPage() != null) query += ("&page=" + filtro.getPage());
-			if(filtro.getStatus() != null) query += ("&status=" + filtro.getStatus());
-			if(filtro.getNumber() != null) query += ("&number=" + filtro.getNumber());
-			if(filtro.getMerchantId() != null) query += ("&merchant_id=" + filtro.getMerchantId());
-			if(filtro.getReference() != null) query += ("&reference=" + filtro.getReference());
-			if(filtro.getTerminalNumber() != null) query += ("&terminal_number=" + filtro.getTerminalNumber());
-			if(filtro.getLastQueryDate() != null) query += ("&last_query_date=" + filtro.getLastQueryDate());
+			if(filtro.getPageSize() != null) query += "&page_size=" + filtro.getPageSize();
+			if(filtro.getPage() != null) query += "&page=" + filtro.getPage();
+			if(filtro.getStatus() != null) query += "&status=" + filtro.getStatus();
+			if(filtro.getNumber() != null) query += "&number=" + filtro.getNumber();
+			if(filtro.getMerchantId() != null) query += "&merchant_id=" + filtro.getMerchantId();
+			if(filtro.getReference() != null) query += "&reference=" + filtro.getReference();
+			if(filtro.getTerminalNumber() != null) query += "&terminal_number=" + filtro.getTerminalNumber();
+			if(filtro.getLastQueryDate() != null) query += "&last_query_date=" + filtro.getLastQueryDate();
 			query = query.replaceFirst("&", "?");
 		}
 
