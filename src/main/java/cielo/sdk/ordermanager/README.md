@@ -5,29 +5,29 @@ SDK para integração com o Cielo Order Manager (Cielo LIO).
 ## Configuração do Order Manager
 
 ```java
-	OrderManager orderManager =
-		new OrderManager("client_id", "merchant_id", "access_token", Environment.SANDBOX);
+OrderManager orderManager =
+	new OrderManager("client_id", "merchant_id", "access_token", Environment.SANDBOX);
 ```
 
 ## Criação de um Order
 
 ```java
-    OrderItem item = OrderItem.builder()
-        .sku("1234567890123")
-        .name("Nome do item")
-        .unitPrice(5000)
-        .quantity(2)
-        .unitOfMeasure(OrderItem.UnitOfMeasure.EACH)
-        .build();
+OrderItem item = OrderItem.builder()
+	.sku("1234567890123")
+	.name("Nome do item")
+	.unitPrice(5000)
+	.quantity(2)
+	.unitOfMeasure(OrderItem.UnitOfMeasure.EACH)
+	.build();
 
-    Order order = Order.builder()
-        .number("123456")
-        .reference("Order 123456")
-        .notes("Order from customer Jack Miller on table 10")
-        .price(10000)
-        .status(Order.Status.DRAFT)
-        .items(Arrays.asList(item))
-        .build();
+Order order = Order.builder()
+	.number("123456")
+	.reference("Order 123456")
+	.notes("Order from customer Jack Miller on table 10")
+	.price(10000)
+	.status(Order.Status.DRAFT)
+	.items(Arrays.asList(item))
+	.build();
 
 try {
     order = orderManager.createOrder(order);
