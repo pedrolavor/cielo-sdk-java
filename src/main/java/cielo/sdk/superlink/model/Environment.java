@@ -8,11 +8,8 @@ public enum Environment implements cielo.sdk.superlink.Environment {
 	PRODUCTION(
 		"https://cieloecommerce.cielo.com.br/api/public/v2",
 		"https://cieloecommerce.cielo.com.br/api/public/v1"
-	),
-	SANDBOX(
-		"https://cieloecommerce.cielo.com.br/sandbox/api/public/v2",
-		"https://cieloecommerce.cielo.com.br/sandbox/api/public/v1"
 	);
+	// there's no sandbox!
 
 	private final String accessTokenUrl;
 	private final String resourceUrl;

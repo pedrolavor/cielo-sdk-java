@@ -34,7 +34,7 @@ public class SuperLinkOAuth2RestTemplateImplTest {
             new OAuth2RestTemplate(new ClientCredentialsResourceDetails());
 
         SuperLink superLink1 = new SuperLinkOAuth2RestTemplateImpl(restTemplate);
-        SuperLink superLink2 = new SuperLinkOAuth2RestTemplateImpl(restTemplate, Environment.SANDBOX);
+        SuperLink superLink2 = new SuperLinkOAuth2RestTemplateImpl(restTemplate, Environment.PRODUCTION);
 
         assertNotNull(superLink1);
         assertNotNull(superLink2);

@@ -1,15 +1,14 @@
 package cielo.sdk.superlink.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 
 import cielo.sdk.superlink.Environment;
 import cielo.sdk.superlink.SuperLink;
+import cielo.sdk.superlink.model.PageProduct;
 import cielo.sdk.superlink.model.Product;
+import cielo.sdk.superlink.model.ProductFilter;
 
 public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
@@ -31,18 +30,18 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
     public Product createLink(Product product) {
         restTemplate.getAccessToken();
-        ResponseEntity<Product> response = restTemplate.postForEntity(url + "/products/", product, Product.class);
+        ResponseEntity<Product> response = restTemplate.postForEntity(url + "/products", product, Product.class);
         return response.getBody();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Product> getLinks() {
-        List<Product> aux = new ArrayList<Product>();
-        
+    public PageProduct getLinks(ProductFilter filter) {
         restTemplate.getAccessToken();
-        ResponseEntity<List<Product>> response =
-            restTemplate.getForEntity(url + "/products/", (Class<List<Product>>) aux.getClass());
+        ResponseEntity<PageProduct> response = restTemplate.getForEntity(url + "/products", PageProduct.class, filter);
         return response.getBody();
+    }
+
+    public PageProduct getLinks() {
+        return getLinks(null);
     }
 
     public Product getLink(String id) {

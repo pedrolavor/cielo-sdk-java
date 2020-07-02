@@ -1,14 +1,14 @@
 package cielo.sdk.superlink;
 
-import java.util.List;
-
+import cielo.sdk.superlink.model.PageProduct;
 import cielo.sdk.superlink.model.Product;
+import cielo.sdk.superlink.model.ProductFilter;
 
 public interface SuperLink {
 
     Product createLink(Product product);
 
-    List<Product> getLinks();
+    PageProduct getLinks(ProductFilter filter);
 
     Product getLink(String id);
 
