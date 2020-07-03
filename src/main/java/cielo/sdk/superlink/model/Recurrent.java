@@ -2,6 +2,8 @@ package cielo.sdk.superlink.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,15 +17,8 @@ import lombok.Setter;
 @Builder
 public class Recurrent {
 
-    private Type type;
+    private RecurrentType type;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Date expirationDate;
-
-    public enum Type {
-        MONTHLY,
-        BIMONTHLY,
-        QUARTERLY,
-        SEMI_ANNUAL,
-        ANNUAL
-    }
 
 }
