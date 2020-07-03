@@ -10,11 +10,8 @@ import lombok.Setter;
 public class PageProduct {
 
     private Integer totalCount;
-
     private Integer totalPages;
-
     private Integer pageIndex;
-
     private List<Product> products;    
     
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,21 +25,40 @@ public class Product {
 
     @EqualsAndHashCode.Include
     private String id;
+
     private String shortUrl;
+
     private ProductType type;
+
     private String name;
+
     private String softDescriptor;
+
     private String description;
+
     private boolean showDescription;
+
     private String sku;
+
+    @JsonProperty
     private Integer price;
+
+    @JsonProperty
     private Integer weight;
+
     private Integer quantity;
+
     private Integer maxNumberOfInstallments;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+
+    @JsonFormat(
+        shape = JsonFormat.Shape.STRING,
+        pattern = "yyyy-MM-dd hh:mm:ss")
     private Date expirationDate;
+
     private Shipping shipping;
+
     private Recurrent recurrent;
+
     private List<Link> links;
 
     public void setPrice(Integer price) {

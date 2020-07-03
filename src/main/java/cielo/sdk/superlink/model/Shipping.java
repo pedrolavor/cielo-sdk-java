@@ -3,6 +3,7 @@ package cielo.sdk.superlink.model;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +19,12 @@ import lombok.Setter;
 public class Shipping {
 
     private String name;
+
+    @JsonProperty
     private Integer price;
+
     private String originZipType;
+    
     private ShippingType type;
 
     public void setPrice(Integer price) {

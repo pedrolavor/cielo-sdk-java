@@ -18,7 +18,10 @@ import lombok.Setter;
 public class Recurrent {
 
     private RecurrentType type;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+
+    @JsonFormat(
+        shape = JsonFormat.Shape.STRING,
+        pattern = "yyyy-MM-dd hh:mm:ss")
     private Date expirationDate;
 
 }

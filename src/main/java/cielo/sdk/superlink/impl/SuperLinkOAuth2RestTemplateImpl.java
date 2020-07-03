@@ -30,6 +30,8 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
     public Product createLink(Product product) {
         restTemplate.getAccessToken();
+        System.out.println(product);
+        System.out.println(product.getPrice());
         ResponseEntity<Product> response = restTemplate.postForEntity(url + "/products", product, Product.class);
         return response.getBody();
     }
