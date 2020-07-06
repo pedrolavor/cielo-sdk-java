@@ -1,5 +1,8 @@
 package cielo.sdk.superlink.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
@@ -30,15 +33,34 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
     public Product createLink(Product product) {
         restTemplate.getAccessToken();
-        System.out.println(product);
-        System.out.println(product.getPrice());
-        ResponseEntity<Product> response = restTemplate.postForEntity(url + "/products", product, Product.class);
+        ResponseEntity<Product> response =
+            restTemplate.postForEntity(url + "/products", product, Product.class);
         return response.getBody();
     }
 
     public PageProduct getLinks(ProductFilter filter) {
+
+        Map<String, String> query = new HashMap<String,String>();
+        String queryString = "";
+        if(filter.getPage() != null) {
+            queryString += "&page={page}";
+            query.put("page", filter.getPage().toString());
+        }
+
+        if(filter.getPageSize() != null) {
+            queryString += "&size={size}";
+            query.put("size", filter.getPageSize().toString());
+        }
+
+        if(filter.getName() != null) {
+            queryString += "&name={name}";
+            query.put("name", filter.getName());
+        }
+        queryString = queryString.replaceFirst("&", "?");
+
         restTemplate.getAccessToken();
-        ResponseEntity<PageProduct> response = restTemplate.getForEntity(url + "/products", PageProduct.class, filter);
+        ResponseEntity<PageProduct> response =
+            restTemplate.getForEntity(url + "/products" + queryString, PageProduct.class, query);
         return response.getBody();
     }
 
