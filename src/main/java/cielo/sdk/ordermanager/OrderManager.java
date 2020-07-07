@@ -54,7 +54,8 @@ public class OrderManager {
 		String response = sendRequest(request);
 		Gson gson = new Gson();
 
-		return gson.fromJson(response, Order.class);
+		Order orderCreated = gson.fromJson(response, Order.class);
+		return getOrder(orderCreated.getId());
 	}
 
 	public void cancelOrder(String id) throws IOException, CieloRequestException {
