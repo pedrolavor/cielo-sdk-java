@@ -13,20 +13,7 @@ import lombok.Setter;
 @Builder
 public class Card {
 	
-	private String bin;
+	private String brand;
+	private String mask;
 	
-	private Brand brand;
-	
-	private String last;
-	
-	public enum Brand {
-		AMEX,
-		AURA,
-		DINERS,
-		DISCOVER,
-		ELO,
-		JCB,
-		MASTERCARD,
-		VISA
-	}
 }

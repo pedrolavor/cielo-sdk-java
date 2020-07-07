@@ -21,25 +21,11 @@ public class Transaction {
 	@EqualsAndHashCode.Include
 	private String id;
 	
-	private int amount;
-	
-	@JsonProperty("authorization_code")
-	@SerializedName("authorization_code")
-	private String authorizationCode;
-	
-	private Card card;
-	
-	@JsonProperty("created_at")
-	@SerializedName("created_at")
-	private String createdAt;
-	
-	private String description;
-	
-	private int number;
+	@JsonProperty("external_id")
+	@SerializedName("external_id")
+	private String externalId;
 
-	@JsonProperty("payment_product")
-	@SerializedName("payment_product")
-	private PaymentProduct paymentProduct;
+	private String description;
 	
 	private Status status;
 	
@@ -47,13 +33,23 @@ public class Transaction {
 	@SerializedName("terminal_number")
 	private int terminalNumber;
 	
+	@JsonProperty("authorization_code")
+	@SerializedName("authorization_code")
+	private String authorizationCode;
+	
+	private String number;
+	
+	private int amount;
+	
 	@JsonProperty("transaction_type")
 	@SerializedName("transaction_type")
 	private TransactionType transactionType;
+
+	@JsonProperty("payment_fields")
+	@SerializedName("payment_fields")
+	private PaymentFields paymentFileds;
 	
-	@JsonProperty("updated_at")
-	@SerializedName("updated_at")
-	private String updatedAt;
+	private Card card;
 	
 	public enum Status {
 		CANCELLED,
