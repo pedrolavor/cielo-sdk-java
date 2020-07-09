@@ -3,6 +3,8 @@ package cielo.sdk.superlink;
 import cielo.sdk.superlink.model.PageProduct;
 import cielo.sdk.superlink.model.Product;
 import cielo.sdk.superlink.model.ProductFilter;
+import cielo.sdk.superlink.model.order.LinkOrder;
+import cielo.sdk.superlink.model.order.LinkOrders;
 
 public interface SuperLink {
 
@@ -10,10 +12,14 @@ public interface SuperLink {
 
     PageProduct getLinks(ProductFilter filter);
 
-    Product getLink(String id);
+    Product getLink(String linkId);
 
-    void updateLink(String id, Product product);
+    LinkOrders getLinkOrders(String linkId);
 
-    void deleteLink(String id);
+    LinkOrder getLinkOrder(String orderNumber);
+
+    void updateLink(String linkId, Product product);
+
+    void deleteLink(String linkId);
     
 }

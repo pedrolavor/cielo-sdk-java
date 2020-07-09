@@ -12,11 +12,14 @@ import cielo.sdk.superlink.SuperLink;
 import cielo.sdk.superlink.model.PageProduct;
 import cielo.sdk.superlink.model.Product;
 import cielo.sdk.superlink.model.ProductFilter;
+import cielo.sdk.superlink.model.order.LinkOrder;
+import cielo.sdk.superlink.model.order.LinkOrders;
 
 public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
     private OAuth2RestTemplate restTemplate;
     private String url;
+    private String urlV2;
 
     public SuperLinkOAuth2RestTemplateImpl(OAuth2RestTemplate restTemplate) {
         this(restTemplate, cielo.sdk.superlink.model.Environment.PRODUCTION);
@@ -29,6 +32,7 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
 
         this.restTemplate = restTemplate;
         this.url = environment.getResourceUrl();
+        this.urlV2 = environment.getAccessTokenUrl();
     }
 
     public Product createLink(Product product) {
@@ -68,20 +72,32 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
         return getLinks(null);
     }
 
-    public Product getLink(String id) {
+    public Product getLink(String linkId) {
         restTemplate.getAccessToken();
-        ResponseEntity<Product> response = restTemplate.getForEntity(url + "/products/" + id, Product.class);
+        ResponseEntity<Product> response = restTemplate.getForEntity(url + "/products/" + linkId, Product.class);
         return response.getBody();
     }
 
-    public void updateLink(String id, Product product) {
+    public void updateLink(String linkId, Product product) {
         restTemplate.getAccessToken();
-        restTemplate.put(url + "/products/" + id, product);
+        restTemplate.put(url + "/products/" + linkId, product);
     }
 
-    public void deleteLink(String id) {
+    public void deleteLink(String linkId) {
         restTemplate.getAccessToken();
-        restTemplate.delete(url + "/products/" + id);
+        restTemplate.delete(url + "/products/" + linkId);
+    }
+
+    public LinkOrders getLinkOrders(String linkId) {
+        restTemplate.getAccessToken();
+        ResponseEntity<LinkOrders> response = restTemplate.getForEntity(url + "/products/" + linkId + "/payments", LinkOrders.class);
+        return response.getBody();
+    }
+
+    public LinkOrder getLinkOrder(String orderNumber) {
+        restTemplate.getAccessToken();
+        ResponseEntity<LinkOrder> response = restTemplate.getForEntity(urlV2 + "/orders/" + orderNumber, LinkOrder.class);
+        return response.getBody();
     }
 
 }
