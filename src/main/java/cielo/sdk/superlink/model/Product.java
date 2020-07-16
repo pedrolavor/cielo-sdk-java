@@ -52,8 +52,15 @@ public class Product {
 
     @JsonFormat(
         shape = JsonFormat.Shape.STRING,
-        pattern = "yyyy-MM-dd hh:mm:ss")
+        pattern = "yyyy-MM-dd HH:mm:ss",
+        timezone = "GMT-3")
     private Date expirationDate;
+
+    @JsonFormat(
+        shape = JsonFormat.Shape.STRING,
+        pattern = "yyyy-MM-dd HH:mm:ss",
+        timezone = "GMT-3")
+    private Date createdDate;
 
     private Shipping shipping;
 

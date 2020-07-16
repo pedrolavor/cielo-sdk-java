@@ -18,6 +18,10 @@ public interface SuperLink {
 
     LinkOrder getLinkOrder(String orderNumber);
 
+    void captureLinkOrder(String orderNumber);
+
+    void voidLinkOrder(String orderNumber);
+
     void updateLink(String linkId, Product product);
 
     void deleteLink(String linkId);

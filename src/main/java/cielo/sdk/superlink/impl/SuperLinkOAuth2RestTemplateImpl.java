@@ -100,4 +100,14 @@ public class SuperLinkOAuth2RestTemplateImpl implements SuperLink {
         return response.getBody();
     }
 
+    public void captureLinkOrder(String orderNumber) {
+        restTemplate.getAccessToken();
+        restTemplate.put(urlV2 + "/orders/" + orderNumber + "/capture", null);
+    }
+
+    public void voidLinkOrder(String orderNumber) {
+        restTemplate.getAccessToken();
+        restTemplate.put(urlV2 + "/orders/" + orderNumber + "/void", null);
+    }
+
 }

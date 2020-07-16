@@ -8,6 +8,7 @@ import lombok.Setter;
 public class PaymentAntifraud {
 
     private int antifraudResult;
+    
     private String description;
     
 }
