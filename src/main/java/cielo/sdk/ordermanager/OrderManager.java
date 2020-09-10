@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
@@ -49,7 +50,7 @@ public class OrderManager {
 		HttpPost request = new HttpPost(url);
 		String entity = new GsonBuilder().setPrettyPrinting().create().toJson(order);
 
-		request.setEntity(new StringEntity(entity));
+		request.setEntity(new StringEntity(entity, Charset.forName("UTF-8")));
 
 		String response = sendRequest(request);
 		Gson gson = new Gson();
@@ -232,7 +233,7 @@ public class OrderManager {
 
 		request.addHeader("Accept", "application/json");
 		request.addHeader("Accept-Encoding", "gzip");
-		request.addHeader("Content-Type", "application/json");
+		request.addHeader("Content-Type", "application/json; charset=utf-8");
 		request.addHeader("User-Agent", "Cielo-Lio SDK");
 
 		request.addHeader("client-id", clientId);
