@@ -55,7 +55,13 @@ public class OrderManager {
 		String response = sendRequest(request);
 		Gson gson = new Gson();
 
-		Order orderCreated = gson.fromJson(response, Order.class);
+		Order orderCreated;
+		try {
+			orderCreated = gson.fromJson(response, Order.class);
+		} catch (Exception ex) {
+			System.out.println("create order response: " + response);
+			throw ex;
+		}
 		return getOrder(orderCreated.getId());
 	}
 
