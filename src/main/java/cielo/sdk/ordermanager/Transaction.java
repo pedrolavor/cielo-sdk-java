@@ -24,6 +24,14 @@ public class Transaction {
 	@JsonProperty("external_id")
 	@SerializedName("external_id")
 	private String externalId;
+	
+	@JsonProperty("created_at")
+	@SerializedName("created_at")
+	private String createdAt;
+	
+	@JsonProperty("updated_at")
+	@SerializedName("updated_at")
+	private String updatedAt;
 
 	private String description;
 	
